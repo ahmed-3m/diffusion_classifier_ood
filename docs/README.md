@@ -26,14 +26,32 @@ setting (ID vs. OOD) on CIFAR-10. At inference, OOD detection is performed by
 computing the difference in diffusion reconstruction error between the two class
 conditions — a method called the **Diffusion Classifier Score**.
 
+### Model Architecture
+- **ConditionalUNet** — 35.7M parameters (all trainable)
+- Input: 32×32×3 images
+- Block channels: (128, 256, 256, 256)
+- Layers per block: 2
+- Attention: AttnDownBlock2D + AttnUpBlock2D (3rd level)
+- Class embedding: 2 classes (binary: ID=0, OOD=1)
+- Noise schedule: squaredcos_cap_v2, 1000 timesteps
+- Prediction type: epsilon (noise prediction)
+
 ### Key Contribution
 A novel **Separation Loss** term added to the training objective encourages the model
 to produce distinctly different reconstruction errors for ID vs. OOD samples,
 directly optimising the OOD detection signal.
 
 ### Best Result
-- **AUROC: 0.9887** (Seed 456, val set)
-- **Mean AUROC: 0.9818 ± 0.0049** across 3 seeds
+- **Best single seed: AUROC 0.9887** (Seed 456)
+- **Mean AUROC: 0.9882 ± 0.0006** across 3 seeds (42, 123, 456)
+
+### Training Hyperparameters
+- Batch size: 64 (effective: 128 with accumulate_grad_batches=2)
+- Learning rate: 1e-4 (cosine schedule, 5 epoch warmup)
+- Max epochs: 200 (with early stopping, patience=30)
+- Precision: 16-mixed (FP16 with dynamic scaling)
+- Separation loss weight: λ=0.01 (optimal, found via ablation)
+- OOD scoring: 15 Monte Carlo trials, difference scoring, mid_focus timesteps
 
 ---
 
@@ -47,7 +65,7 @@ All figures are in [`results/figures/`](../results/figures/):
 | `score_distributions_all.png` | OOD score distributions per seed |
 | `k_ablation.png` | Effect of number of MC trials K |
 | `timestep_strategy_comparison.png` | Timestep sampling strategies |
-| `scoring_method_comparison.png` | Difference vs ratio scoring |
+| `scoring_method_comparison.png` | Difference vs ratio vs id_error scoring |
 | `calibration_curves.png` | Calibration of OOD scores |
 | `confusion_matrix.png` | Confusion matrix on test set |
 
@@ -57,8 +75,17 @@ All figures are in [`results/figures/`](../results/figures/):
 
 All tables are in [`results/latex_tables/`](../results/latex_tables/):
 
-- `main_results_table.tex` — Mean/std AUROC across seeds
-- `separation_loss_table.tex` — Ablation table (6 weights)
-- `k_ablation_table.tex` — K sensitivity table
-- `scoring_method_table.tex` — Scoring method comparison
-- `timestep_strategy_table.tex` — Timestep strategy comparison
+- `main_results_table.tex` — Mean/std AUROC across seeds (**⚠️ needs regeneration**)
+- `separation_loss_table.tex` — Ablation table (6 weights) (**⚠️ partially empty, needs regeneration**)
+- `k_ablation_table.tex` — K sensitivity table ✅
+- `scoring_method_table.tex` — Scoring method comparison ✅
+- `timestep_strategy_table.tex` — Timestep strategy comparison ✅
+
+---
+
+## ⚠️ Known Issues / TODOs
+
+1. `results/external_ood_results.json` is **empty** `{}` — external OOD eval needs re-running
+2. `main_results_table.tex` has empty body — needs regeneration with seed results
+3. `separation_loss_table.tex` has rows with 0.0 — needs updating with final ablation data
+4. Separation loss ablation ran with `num_trials=15`, but K-ablation JSON has K={1,5,10,25,50,100}
