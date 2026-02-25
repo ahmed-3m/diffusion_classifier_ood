@@ -14,6 +14,7 @@ This directory documents all experiments, results, and design decisions for the
 | [experiments.md](experiments.md) | Full log of all experiments run (training, evaluation, ablations) |
 | [results_summary.md](results_summary.md) | Final results table — all metrics in one place |
 | [ablation_study.md](ablation_study.md) | Separation loss ablation study in detail |
+| [dataset.md](dataset.md) | Dataset description, splits, augmentation, design decisions |
 | [setup.md](setup.md) | Environment setup & how to reproduce all experiments |
 | [gpu_log.md](gpu_log.md) | GPU usage log across servers (student06, student07, student10) |
 
