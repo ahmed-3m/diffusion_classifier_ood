@@ -1,10 +1,63 @@
 import torch
 import torch.nn.functional as F
-from typing import Tuple
+from typing import Tuple, Literal
 from tqdm import tqdm
 import logging
 
 logger = logging.getLogger(__name__)
+
+
+def sample_weighted_timesteps(
+    batch_size: int,
+    num_timesteps: int,
+    device: torch.device,
+    mode: Literal["uniform", "mid_focus", "stratified"] = "mid_focus",
+) -> torch.Tensor:
+    """
+    Sample timesteps with various strategies.
+    
+    Args:
+        batch_size: Number of timesteps to sample
+        num_timesteps: Total number of diffusion timesteps
+        device: Target device
+        mode: Sampling strategy
+            - "uniform": Uniform random sampling across all timesteps
+            - "mid_focus": Weighted sampling focusing on t=100-500 (best for OOD)
+            - "stratified": Stratified sampling across bins
+    
+    Returns:
+        Tensor of timesteps [batch_size]
+    """
+    if mode == "uniform":
+        return torch.randint(1, num_timesteps, (batch_size,), device=device)
+    
+    elif mode == "mid_focus":
+        # Focus on mid-range timesteps where class separation is strongest
+        # Use truncated normal distribution centered at t=300
+        mean = 300.0
+        std = 150.0
+        t_min, t_max = 50, 700
+        
+        # Sample from truncated normal
+        samples = torch.randn(batch_size, device=device) * std + mean
+        samples = samples.clamp(t_min, t_max).long()
+        return samples
+    
+    elif mode == "stratified":
+        # Stratified sampling: divide into bins and sample from each
+        bins = [50, 150, 300, 500, 700, 900]
+        bin_idx = torch.randint(0, len(bins) - 1, (batch_size,), device=device)
+        
+        timesteps = torch.zeros(batch_size, dtype=torch.long, device=device)
+        for i, (low, high) in enumerate(zip(bins[:-1], bins[1:])):
+            mask = bin_idx == i
+            count = mask.sum().item()
+            if count > 0:
+                timesteps[mask] = torch.randint(low, high, (count,), device=device)
+        return timesteps
+    
+    else:
+        raise ValueError(f"Unknown timestep sampling mode: {mode}")
 
 
 @torch.no_grad()
@@ -14,14 +67,15 @@ def diffusion_classifier_score(
     images: torch.Tensor,
     num_conditions: int = 2,
     num_trials: int = 10,
+    scoring_method: Literal["difference", "ratio", "id_error"] = "difference",
+    timestep_mode: Literal["uniform", "mid_focus", "stratified"] = "mid_focus",
 ) -> Tuple[torch.Tensor, torch.Tensor]:
     """
     Algorithm 1: Diffusion Classifier for OOD scoring.
     
-    For each image, sample random timesteps and noise, then measure
-    reconstruction error under each class conditioning. The class with
-    lower error is predicted as the image's class. OOD score is the
-    error under the ID condition (c=0).
+    For each image, sample timesteps and noise, then measure reconstruction
+    error under each class conditioning. OOD score is computed based on the
+    chosen scoring method.
     
     Args:
         model: Conditional UNet model
@@ -29,10 +83,20 @@ def diffusion_classifier_score(
         images: Input images [B, C, H, W]
         num_conditions: Number of class conditions
         num_trials: Number of random trials per image
+        scoring_method: How to compute OOD score
+            - "difference": error(c=0) - error(c=1) [RECOMMENDED]
+            - "ratio": error(c=0) / error(c=1)
+            - "id_error": error(c=0) only (original method)
+        timestep_mode: How to sample timesteps
+            - "mid_focus": Focus on t=100-500 [RECOMMENDED]
+            - "uniform": Uniform random
+            - "stratified": Stratified across ranges
         
     Returns:
-        ood_scores: Reconstruction error under c=0 [B]
+        ood_scores: OOD scores for each image [B]
+            Higher = more likely OOD
         predictions: Predicted class per image [B]
+            0 = predicted ID, 1 = predicted OOD
     """
     device = images.device
     batch_size = images.shape[0]
@@ -41,7 +105,10 @@ def diffusion_classifier_score(
     all_errors = torch.zeros(batch_size, num_conditions, num_trials, device=device)
     
     for trial_idx in range(num_trials):
-        timesteps = torch.randint(1, num_timesteps, (batch_size,), device=device)
+        # Use weighted timestep sampling
+        timesteps = sample_weighted_timesteps(
+            batch_size, num_timesteps, device, mode=timestep_mode
+        )
         noise = torch.randn_like(images)
         
         noisy = scheduler.add_noise(images, noise, timesteps)
@@ -56,9 +123,25 @@ def diffusion_classifier_score(
             mse = F.mse_loss(pred, noise, reduction='none').mean(dim=[1, 2, 3])
             all_errors[:, c, trial_idx] = mse
     
+    # Average across trials
     mean_errors = all_errors.mean(dim=2)
+    
+    # Predictions based on which condition has lower error
     predictions = mean_errors.argmin(dim=1)
-    ood_scores = mean_errors[:, 0]
+    
+    # Compute OOD scores based on chosen method
+    if scoring_method == "difference":
+        # RECOMMENDED: Difference-based scoring
+        # Higher score = higher ID error relative to OOD error = more likely OOD
+        ood_scores = mean_errors[:, 0] - mean_errors[:, 1]
+    elif scoring_method == "ratio":
+        # Ratio-based scoring
+        ood_scores = mean_errors[:, 0] / (mean_errors[:, 1] + 1e-8)
+    elif scoring_method == "id_error":
+        # Original method: just use ID error
+        ood_scores = mean_errors[:, 0]
+    else:
+        raise ValueError(f"Unknown scoring method: {scoring_method}")
     
     return ood_scores, predictions
 

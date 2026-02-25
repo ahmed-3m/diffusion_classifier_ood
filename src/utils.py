@@ -135,7 +135,9 @@ class SampleVisualizationCallback(L.Callback):
     def on_validation_epoch_end(self, trainer, pl_module):
         if (trainer.current_epoch + 1) % self.every_n_epochs != 0:
             return
-        
+        if not trainer.is_global_zero:   # DDP: only rank 0 logs samples
+            return
+
         pl_module.eval()
         
         try:

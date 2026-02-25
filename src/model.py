@@ -21,7 +21,7 @@ class ConditionalUNet(nn.Module):
         in_channels: int = 3,
         out_channels: int = 3,
         layers_per_block: int = 2,
-        block_out_channels: tuple = (128, 256, 256, 256),
+        block_out_channels: tuple = (128, 256, 256, 512),
         down_block_types: tuple = (
             "DownBlock2D",
             "DownBlock2D",

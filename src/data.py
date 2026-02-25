@@ -122,10 +122,26 @@ class CIFAR10BinaryDataModule(L.LightningDataModule):
         )
     
     def val_dataloader(self):
+        # Create balanced validation using stratified sampling
+        # This addresses the 9:1 class imbalance (ID is only 10% of test set)
+        targets = torch.tensor([label for _, label in self.val_dataset])
+        binary_targets = (targets != self.id_class).long()
+        
+        # Calculate weights for balanced sampling
+        class_counts = torch.bincount(binary_targets)
+        weights = 1.0 / class_counts[binary_targets].float()
+        
+        # Use WeightedRandomSampler for stratified validation
+        sampler = torch.utils.data.WeightedRandomSampler(
+            weights=weights,
+            num_samples=len(self.val_dataset),
+            replacement=True,
+        )
+        
         return DataLoader(
             self.val_dataset,
             batch_size=self.batch_size * 2,
-            shuffle=False,
+            sampler=sampler,  # Use sampler instead of shuffle
             num_workers=self.num_workers,
             pin_memory=self.pin_memory,
             collate_fn=self._val_collate,

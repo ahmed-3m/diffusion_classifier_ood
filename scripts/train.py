@@ -2,7 +2,10 @@ import os
 import sys
 import argparse
 import logging
+import random
 from datetime import datetime
+
+import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -42,7 +45,16 @@ def parse_args():
     
     parser.add_argument("--num_trials", type=int, default=10)
     parser.add_argument("--eval_interval", type=int, default=10)
+    parser.add_argument("--scoring_method", type=str, default="difference", 
+                        choices=["difference", "ratio", "id_error"],
+                        help="OOD scoring method: 'difference' (recommended), 'ratio', or 'id_error'")
+    parser.add_argument("--timestep_mode", type=str, default="mid_focus",
+                        choices=["mid_focus", "uniform", "stratified"],
+                        help="Timestep sampling: 'mid_focus' (recommended), 'uniform', or 'stratified'")
+    parser.add_argument("--separation_loss_weight", type=float, default=0.01,
+                        help="Weight for class separation loss (default: 0.01)")
     
+    parser.add_argument("--seed", type=int, default=42, help="Random seed for reproducibility")
     parser.add_argument("--num_workers", type=int, default=4)
     parser.add_argument("--id_class", type=int, default=0)
     parser.add_argument("--data_dir", type=str, default="./data")
@@ -58,9 +70,23 @@ def parse_args():
     return parser.parse_args()
 
 
+def set_seed(seed: int):
+    """Set all random seeds for reproducibility."""
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    logger.info(f"Set seed to {seed} (deterministic mode)")
+
+
 def main():
     args = parse_args()
     setup_logging()
+    
+    # Set seed for reproducibility
+    set_seed(args.seed)
     
     os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
     
@@ -73,11 +99,15 @@ def main():
     
     logger.info(f"Output directory: {output_dir}")
     logger.info(f"Experiment: {run_name}")
+    logger.info(f"Seed: {args.seed}")
     
     model = DiffusionClassifierOOD(
         num_train_timesteps=1000,
         num_class_embeds=2,
         num_trials=args.num_trials,
+        scoring_method=args.scoring_method,
+        timestep_mode=args.timestep_mode,
+        separation_loss_weight=args.separation_loss_weight,
         learning_rate=args.learning_rate,
         weight_decay=0.01,
         warmup_epochs=5,
@@ -130,6 +160,8 @@ def main():
         default_root_dir=output_dir,
         devices="auto",
         accelerator="auto",
+        deterministic=True,
+        num_sanity_val_steps=0,          # skip startup OOD sanity check (very slow)
         callbacks=[
             checkpoint_callback,
             early_stopping,

@@ -31,3 +31,17 @@ outputs/
 data/
 wandb/
 .DS_Store
+
+# Large result files (checkpoints, raw scores)
+results/**/*.ckpt
+results/raw_scores/
+results/seed*/wandb/
+results/sep_loss_ablation/*/wandb/
+output_quad/
+master_log.txt
+
+# Keep figures, JSONs, latex tables (tracked)
+!results/figures/
+!results/latex_tables/
+!results/*.json
+!results/sep_loss_ablation/*.log

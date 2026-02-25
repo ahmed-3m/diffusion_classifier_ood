@@ -31,7 +31,7 @@ class DiffusionClassifierOOD(L.LightningModule):
         in_channels: int = 3,
         out_channels: int = 3,
         layers_per_block: int = 2,
-        block_out_channels: tuple = (128, 256, 256, 256),
+        block_out_channels: tuple = (128, 256, 256, 512),
         down_block_types: tuple = (
             "DownBlock2D",
             "DownBlock2D",
@@ -48,6 +48,9 @@ class DiffusionClassifierOOD(L.LightningModule):
         num_train_timesteps: int = 1000,
         beta_schedule: str = "squaredcos_cap_v2",
         num_trials: int = 10,
+        scoring_method: str = "difference",  # 'difference', 'ratio', or 'id_error'
+        timestep_mode: str = "mid_focus",  # 'mid_focus', 'uniform', or 'stratified'
+        separation_loss_weight: float = 0.01,  # Weight for class separation loss (reduced)
         learning_rate: float = 1e-4,
         weight_decay: float = 0.01,
         warmup_epochs: int = 5,
@@ -90,13 +93,33 @@ class DiffusionClassifierOOD(L.LightningModule):
         noise = torch.randn_like(images)
         
         noisy = self.scheduler.add_noise(images, noise, timesteps)
+        
+        # Standard denoising prediction with correct labels
         pred = self.model(noisy, timesteps, labels)
+        mse_loss = F.mse_loss(pred, noise)
         
-        loss = F.mse_loss(pred, noise)
+        # Class Separation Loss: encourage different predictions for different classes
+        # Predict with BOTH conditions and maximize their difference
+        labels_c0 = torch.zeros_like(labels)  # All ID
+        labels_c1 = torch.ones_like(labels)   # All OOD
         
-        self.log("train/loss", loss, prog_bar=True, sync_dist=True)
+        pred_c0 = self.model(noisy, timesteps, labels_c0)
+        pred_c1 = self.model(noisy, timesteps, labels_c1)
         
-        return loss
+        # Separation loss: negative MSE between predictions (we want to MAXIMIZE difference)
+        # The more different pred_c0 and pred_c1 are, the lower this loss
+        separation_loss = -F.mse_loss(pred_c0, pred_c1)
+        
+        # Combined loss
+        total_loss = mse_loss + self.hparams.separation_loss_weight * separation_loss
+        
+        # Logging
+        self.log("train/loss", total_loss, prog_bar=True, sync_dist=True)
+        self.log("train/mse_loss", mse_loss, sync_dist=True)
+        self.log("train/separation_loss", separation_loss, sync_dist=True)
+        self.log("train/pred_diff", F.mse_loss(pred_c0, pred_c1), sync_dist=True)  # Positive version
+        
+        return total_loss
     
     @torch.no_grad()
     def validation_step(self, batch, batch_idx):
@@ -109,6 +132,8 @@ class DiffusionClassifierOOD(L.LightningModule):
             images,
             num_conditions=self.hparams.num_class_embeds,
             num_trials=self.hparams.num_trials,
+            scoring_method=self.hparams.scoring_method,
+            timestep_mode=self.hparams.timestep_mode,
         )
         
         self.validation_outputs.append({
@@ -129,9 +154,18 @@ class DiffusionClassifierOOD(L.LightningModule):
         
         metrics = compute_all_metrics(all_labels, all_scores, all_preds)
         
+        # Log score distribution stats for debugging
+        id_mask = all_labels == 0
+        ood_mask = all_labels == 1
+        id_scores = all_scores[id_mask]
+        ood_scores = all_scores[ood_mask]
+        
         self.log("val/auroc", metrics['auroc'], prog_bar=True, sync_dist=True)
         self.log("val/fpr95", metrics['fpr95'], prog_bar=False, sync_dist=True)
         self.log("val/aupr", metrics['aupr'], prog_bar=False, sync_dist=True)
+        self.log("val/id_score_mean", id_scores.mean(), sync_dist=True)
+        self.log("val/ood_score_mean", ood_scores.mean(), sync_dist=True)
+        self.log("val/score_separation", ood_scores.mean() - id_scores.mean(), sync_dist=True)
         
         if 'accuracy' in metrics:
             self.log("val/accuracy", metrics['accuracy'], prog_bar=True, sync_dist=True)
@@ -140,7 +174,8 @@ class DiffusionClassifierOOD(L.LightningModule):
             f"Epoch {self.current_epoch} | "
             f"AUROC: {metrics['auroc']:.4f} | "
             f"FPR95: {metrics['fpr95']:.4f} | "
-            f"Accuracy: {metrics.get('accuracy', 0):.4f}"
+            f"Accuracy: {metrics.get('accuracy', 0):.4f} | "
+            f"Score sep: {ood_scores.mean() - id_scores.mean():.4f}"
         )
     
     @torch.no_grad()
