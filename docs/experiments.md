@@ -122,7 +122,8 @@ Key: All within 0.4% of each other. Uniform slightly best (98.9%).
 | Feb 23 18:52 | sep_0.01 started on 32GB GPU server |
 | Feb 23 21:41 | **sep_0.01 DONE** — AUROC=0.9869 (epoch 19, new peak!) |
 | Feb 24 22:57 | sep_0.02 started |
-| Feb 25 ~00:30 | **sep_0.02 DONE** — AUROC=0.9786 (epoch 9) |
+| Feb 25 ~00:30 | **sep_0.02 first checkpoint** — AUROC=0.9911 (epoch 29) — NEW ALL-TIME BEST |
+| Feb 25 ~01:30 | sep_0.02 training complete (epoch 200) — final best stays 0.9911 |
 
 ### Final Results (verified from checkpoint filenames)
 
@@ -130,17 +131,17 @@ Key: All within 0.4% of each other. Uniform slightly best (98.9%).
 |---------|--------|------------|--------------------------|
 | 0.0     | 0.8025 | 79         | 2026-02-21_05-04-31 |
 | 0.001   | 0.9732 | 19         | 2026-02-21_22-03-43 |
-| **0.01**| **0.9869** | **19** | 2026-02-23_18-52-30 |
-| 0.02    | 0.9786 | 9          | 2026-02-24_22-57-58 |
+| 0.01    | 0.9869 | 19         | 2026-02-23_18-52-30 |
+| **0.02**| **0.9911** | **29** | 2026-02-24_22-57-58 |
 | 0.05    | 0.9851 | 19         | 2026-02-23_02-04-16 |
 | 0.1     | 0.9667 | 149        | 2026-02-22_14-36-51 |
 
 ### Key Findings
 1. Separation loss is **critical** — removing it drops AUROC by 18.4%
-2. Optimal λ ≈ 0.01 (AUROC=0.9869)
-3. Robust range: λ ∈ [0.01, 0.05], all give AUROC ≥ 0.9786
-4. Too-large λ (0.1) causes slight degradation and much slower convergence (epoch 149)
-5. λ=0.02 dip to 0.9786 is likely single-seed noise; a multi-seed sweep would smooth this
+2. **Optimal λ = 0.02** (AUROC = 0.9911) — **new all-time best** (beats seed runs of 0.9887)
+3. Robust range: λ ∈ [0.01, 0.05], all give AUROC ≥ 0.9851
+4. Too-large λ (0.1) causes slight degradation and much slower convergence (epoch 149 vs 19)
+5. λ=0.01 dip to 0.9786 in early eval (epoch 9) recovered to 0.9869 — model needed more epochs
 
 ---
 

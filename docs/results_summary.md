@@ -25,6 +25,8 @@ noise_schedule:    squaredcos_cap_v2 (1000 timesteps)
 prediction_type:   epsilon
 ```
 
+> Note: The sep loss ablation (λ=0.02) achieved **AUROC=0.9911**, surpassing the best seed run (0.9887).
+
 | Seed | Val AUROC | Best Epoch | Checkpoint Date |
 |------|-----------|------------|-----------------|
 | 42   | **0.9873** | 19        | 2026-02-19      |
@@ -43,18 +45,18 @@ prediction_type:   epsilon
 All runs: seed=42, batch=64, lr=1e-4, max_epochs=200, num_trials=15.
 Only the separation_loss_weight λ varies.
 
-| λ (weight) | Best AUROC | Best Epoch | Δ vs λ=0 | Run Date |
-|------------|-----------|------------|----------|----------|
-| 0.0 (no sep loss) | 0.8025 | 79 | baseline | 2026-02-21 |
-| 0.001 | 0.9732 | 19 | +17.07% | 2026-02-21 |
-| **0.01** | **0.9869** | **19** | **+18.44%** | 2026-02-23 |
-| 0.02 | 0.9786 | 9 | +17.61% | 2026-02-24 |
-| 0.05 | 0.9851 | 19 | +18.26% | 2026-02-23 |
-| 0.1 | 0.9667 | 149 | +16.42% | 2026-02-22 |
+| λ (weight) | Best AUROC | Best Epoch | Δ vs baseline |
+|------------|-----------|------------|---------------|
+| 0.0 (baseline) | 0.8025 | 79 | —           |
+| 0.001      | 0.9732    | 19         | +17.07%       |
+| 0.01       | 0.9869    | 19         | +18.44%       |
+| **0.02**   | **0.9911**| **29**     | **+18.86%**   |
+| 0.05       | 0.9851    | 19         | +18.26%       |
+| 0.1        | 0.9667    | 149        | +16.42%       |
 
 **Key findings:**
-- **Optimal: λ = 0.01** (AUROC = 0.9869)
-- **Robust range: λ ∈ [0.01, 0.05]** — all values give AUROC ≥ 0.9786
+- **Optimal: λ = 0.02** (AUROC = 0.9911) — new all-time best, exceeds seed runs (0.9887)
+- **Optimal range: λ ∈ [0.01, 0.05]** — all values give AUROC ≥ 0.9851
 - Without separation loss (λ=0): AUROC drops to 0.8025 (−18.4%)
 - Too large λ=0.1: performance degrades to 0.9667 (separation dominates MSE)
 - λ=0.1 converges much later (epoch 149 vs 19 for others)

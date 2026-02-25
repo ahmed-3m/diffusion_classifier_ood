@@ -42,9 +42,9 @@ A novel **Separation Loss** term added to the training objective encourages the 
 to produce distinctly different reconstruction errors for ID vs. OOD samples,
 directly optimising the OOD detection signal.
 
-### Best Result
-- **Best single seed: AUROC 0.9887** (Seed 456)
-- **Mean AUROC: 0.9882 ± 0.0006** across 3 seeds (42, 123, 456)
+### Best Results
+- **Best seed run: AUROC 0.9887** (Seed 456), Mean: **0.9882 ± 0.0006** (3 seeds)
+- **Best overall: AUROC 0.9911** (sep loss ablation λ=0.02, epoch 29) ⭐
 
 ### Training Hyperparameters
 - Batch size: 64 (effective: 128 with accumulate_grad_batches=2)
