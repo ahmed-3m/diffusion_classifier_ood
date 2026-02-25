@@ -44,4 +44,9 @@ master_log.txt
 !results/figures/
 !results/latex_tables/
 !results/*.json
-!results/sep_loss_ablation/*.log
+
+# Exclude large training logs (can be 50MB+)
+results/**/*.log
+results/figures_generation.log
+results/reeval.log
+results/sep_ablation_eval.log
