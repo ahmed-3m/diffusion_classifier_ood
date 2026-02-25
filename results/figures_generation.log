@@ -1,0 +1,62 @@
+2026-02-20 22:07:37,936 | INFO | ============================================================
+2026-02-20 22:07:37,936 | INFO | GENERATING THESIS FIGURES
+2026-02-20 22:07:37,936 | INFO | Output: /system/user/studentwork/mohammed/2025/diffusion_classifier_ood/results/figures
+2026-02-20 22:07:37,936 | INFO | ============================================================
+2026-02-20 22:07:37,936 | INFO | 
+[ROC Curves OOD]
+2026-02-20 22:07:37,938 | WARNING | No seed results found
+2026-02-20 22:07:37,938 | INFO | 
+[Score Distributions]
+scripts/generate_all_figures.py:177: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  id_scores = torch.load(id_path).numpy()
+scripts/generate_all_figures.py:185: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  ood_datasets[ds_name] = torch.load(os.path.join(raw_scores_dir, fname)).numpy()
+2026-02-20 22:07:39,924 | INFO |   Saved: score_distributions.png
+2026-02-20 22:07:43,468 | INFO |   Saved: score_distributions_all.png
+2026-02-20 22:07:43,468 | INFO | 
+[K Ablation]
+2026-02-20 22:07:43,957 | INFO |   Saved: k_ablation.png
+2026-02-20 22:07:43,958 | INFO | 
+[Error vs Timestep]
+2026-02-20 22:07:44,282 | INFO |   Saved: error_vs_timestep.png
+2026-02-20 22:07:44,282 | INFO | 
+[Timestep Strategy]
+2026-02-20 22:07:44,496 | INFO |   Saved: timestep_strategy_comparison.png
+2026-02-20 22:07:44,496 | INFO | 
+[Scoring Method]
+2026-02-20 22:07:44,721 | INFO |   Saved: scoring_method_comparison.png
+2026-02-20 22:07:44,721 | INFO | 
+[Separation Loss]
+2026-02-20 22:07:45,118 | INFO |   Saved: separation_loss_ablation.png
+2026-02-20 22:07:45,119 | INFO | 
+[Training Loss Curves]
+2026-02-20 22:07:45,154 | INFO | Training loss curve from wandb data — placeholder generated
+2026-02-20 22:07:45,154 | INFO | 
+[Per-Class Performance]
+2026-02-20 22:07:45,441 | INFO |   Saved: per_class_performance.png
+2026-02-20 22:07:45,441 | INFO | 
+[Confusion Matrix]
+scripts/generate_all_figures.py:528: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  id_scores = torch.load(id_path).numpy()
+scripts/generate_all_figures.py:529: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  ood_scores = torch.load(ood_path).numpy()
+2026-02-20 22:07:45,711 | INFO |   Saved: confusion_matrix.png
+2026-02-20 22:07:45,712 | INFO | 
+[Calibration Curves]
+scripts/generate_all_figures.py:629: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  id_scores = torch.load(id_path).numpy()
+scripts/generate_all_figures.py:630: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  ood_scores = torch.load(ood_path).numpy()
+2026-02-20 22:07:45,961 | INFO |   Saved: calibration_curves.png
+2026-02-20 22:07:45,961 | INFO | 
+[LaTeX Tables]
+2026-02-20 22:07:45,966 | INFO |   Generated: main_results_table.tex
+2026-02-20 22:07:45,970 | INFO |   Generated: k_ablation_table.tex
+2026-02-20 22:07:45,974 | INFO |   Generated: timestep_strategy_table.tex
+2026-02-20 22:07:45,978 | INFO |   Generated: scoring_method_table.tex
+2026-02-20 22:07:45,982 | INFO |   Generated: separation_loss_table.tex
+2026-02-20 22:07:45,982 | INFO | 
+============================================================
+2026-02-20 22:07:45,982 | INFO | FIGURE GENERATION COMPLETE
+2026-02-20 22:07:45,982 | INFO | Figures saved to: /system/user/studentwork/mohammed/2025/diffusion_classifier_ood/results/figures
+2026-02-20 22:07:45,982 | INFO | ============================================================

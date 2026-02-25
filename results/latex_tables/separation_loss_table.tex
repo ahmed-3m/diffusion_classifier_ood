@@ -1,0 +1,17 @@
+% Separation Loss Ablation Table
+\begin{table}[htbp]
+    \centering
+    \caption{Effect of separation loss weight $\lambda_{sep}$ on OOD detection.}
+    \label{tab:separation-loss}
+    \begin{tabular}{lccccc}
+        \toprule
+        $\lambda_{sep}$ & CIFAR AUROC (\%) & CIFAR FPR95 (\%) & SVHN AUROC (\%) & SVHN FPR95 (\%) \\
+        \midrule
+        0.0 & 0.0 & 0.0 & 0.0 & 0.0 \\
+        0.001 & 0.0 & 0.0 & 0.0 & 0.0 \\
+        0.01 & 98.7 & 6.4 & 89.4 & 28.5 \\
+        0.05 & 0.0 & 0.0 & 0.0 & 0.0 \\
+        0.1 & 0.0 & 0.0 & 0.0 & 0.0 \\
+        \bottomrule
+    \end{tabular}
+\end{table}

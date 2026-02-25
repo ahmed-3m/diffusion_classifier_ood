@@ -1,0 +1,710 @@
+2026-02-20 16:20:39 | __main__ | INFO | Set seed to 42 (deterministic mode)
+2026-02-20 16:20:39 | __main__ | INFO | Output directory: /system/user/studentwork/mohammed/2025/diffusion_classifier_ood/results/sep_loss_ablation/2026-02-20_16-20-39_sep_0.001
+2026-02-20 16:20:39 | __main__ | INFO | Experiment: 2026-02-20/16-20-39_sep_0.001
+2026-02-20 16:20:39 | __main__ | INFO | Seed: 42
+2026-02-20 16:20:39.662141: I tensorflow/tsl/cuda/cudart_stub.cc:28] Could not find cuda drivers on your machine, GPU will not be used.
+2026-02-20 16:20:39.709791: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2026-02-20 16:20:40.847588: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+2026-02-20 16:20:43 | src.lightning_module | INFO | Model initialized with 68.79M parameters
+Using 16bit Automatic Mixed Precision (AMP)
+/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/plugins/precision/amp.py:52: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+HPU available: False, using: 0 HPUs
+2026-02-20 16:20:43 | __main__ | INFO | ============================================================
+2026-02-20 16:20:43 | __main__ | INFO |  DIFFUSION CLASSIFIER FOR OOD DETECTION
+2026-02-20 16:20:43 | __main__ | INFO |  Training started
+2026-02-20 16:20:43 | __main__ | INFO | ============================================================
+wandb: WARNING The anonymous setting has no effect and will be removed in a future version.
+wandb: Currently logged in as: ahmed-mu-0593 (am24) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run 95kdqor7
+wandb: Tracking run with wandb version 0.23.1
+wandb: Run data is saved locally in /system/user/studentwork/mohammed/2025/diffusion_classifier_ood/results/sep_loss_ablation/2026-02-20_16-20-39_sep_0.001/wandb/run-20260220_162045-95kdqor7
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run 2026-02-20/16-20-39_sep_0.001
+wandb: ⭐️ View project at https://wandb.ai/am24/diffusion-classifier-ood
+wandb: 🚀 View run at https://wandb.ai/am24/diffusion-classifier-ood/runs/95kdqor7
+wandb: Detected [huggingface_hub.inference] in use.
+wandb: Use W&B Weave for improved LLM call tracing. Install Weave with `pip install weave` then add `import weave` to the top of your script.
+wandb: For more information, check out the docs at: https://weave-docs.wandb.ai/
+2026-02-20 16:21:06 | src.data | INFO | Dataset setup complete:
+2026-02-20 16:21:06 | src.data | INFO |   ID class (c=0): airplane - 5000 train samples
+2026-02-20 16:21:06 | src.data | INFO |   OOD proxy (c=1): rest - 45000 train samples
+2026-02-20 16:21:06 | src.data | INFO |   Validation: 10000 samples
+/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/callbacks/model_checkpoint.py:652: Checkpoint directory /system/user/studentwork/mohammed/2025/diffusion_classifier_ood/results/sep_loss_ablation/2026-02-20_16-20-39_sep_0.001 exists and is not empty.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [2]
+
+  | Name  | Type            | Params | Mode 
+--------------------------------------------------
+0 | model | ConditionalUNet | 68.8 M | train
+--------------------------------------------------
+68.8 M    Trainable params
+0         Non-trainable params
+68.8 M    Total params
+275.176   Total estimated model params size (MB)
+Files already downloaded and verified
+Files already downloaded and verified
+Sanity Checking: |          | 0/? [00:00<?, ?it/s]Sanity Checking:   0%|          | 0/2 [00:00<?, ?it/s]Sanity Checking DataLoader 0:   0%|          | 0/2 [00:00<?, ?it/s]Sanity Checking DataLoader 0:  50%|█████     | 1/2 [00:10<00:10,  0.10it/s]Sanity Checking DataLoader 0: 100%|██████████| 2/2 [00:20<00:00,  0.10it/s]2026-02-20 16:21:29 | src.lightning_module | INFO | Epoch 0 | AUROC: 0.3049 | FPR95: 0.9421 | Accuracy: 0.3438 | Score sep: -0.0119
+                                                                           Training: |          | 0/? [00:00<?, ?it/s]Training:   0%|          | 0/1406 [00:00<?, ?it/s]Epoch 0:   0%|          | 0/1406 [00:00<?, ?it/s] Epoch 0:   0%|          | 1/1406 [00:01<30:28,  0.77it/s]Epoch 0:   0%|          | 1/1406 [00:01<32:30,  0.72it/s, v_num=qor7, train/loss=1.160]Epoch 0:   0%|          | 2/1406 [00:02<32:24,  0.72it/s, v_num=qor7, train/loss=1.160]Epoch 0:   0%|          | 2/1406 [00:02<32:25,  0.72it/s, v_num=qor7, train/loss=1.160]Epoch 0:   0%|          | 3/1406 [00:03<30:59,  0.75it/s, v_num=qor7, train/loss=1.160]Epoch 0:   0%|          | 3/1406 [00:04<31:39,  0.74it/s, v_num=qor7, train/loss=0.993]Epoch 0:   0%|          | 4/1406 [00:05<31:22,  0.74it/s, v_num=qor7, train/loss=0.993]Epoch 0:   0%|          | 4/1406 [00:05<31:27,  0.74it/s, v_num=qor7, train/loss=0.992]Epoch 0:   0%|          | 5/1406 [00:06<30:46,  0.76it/s, v_num=qor7, train/loss=0.992]Epoch 0:   0%|          | 5/1406 [00:06<31:10,  0.75it/s, v_num=qor7, train/loss=0.848]Epoch 0:   0%|          | 6/1406 [00:07<31:02,  0.75it/s, v_num=qor7, train/loss=0.848]Epoch 0:   0%|          | 6/1406 [00:07<31:05,  0.75it/s, v_num=qor7, train/loss=0.834]Epoch 0:   0%|          | 7/1406 [00:09<30:52,  0.76it/s, v_num=qor7, train/loss=0.834]Epoch 0:   0%|          | 7/1406 [00:09<31:11,  0.75it/s, v_num=qor7, train/loss=0.722]Epoch 0:   1%|          | 8/1406 [00:10<31:05,  0.75it/s, v_num=qor7, train/loss=0.722]Epoch 0:   1%|          | 8/1406 [00:10<31:07,  0.75it/s, v_num=qor7, train/loss=0.737]Epoch 0:   1%|          | 9/1406 [00:12<32:10,  0.72it/s, v_num=qor7, train/loss=0.737]Epoch 0:   1%|          | 9/1406 [00:12<32:40,  0.71it/s, v_num=qor7, train/loss=0.613]Epoch 0:   1%|          | 10/1406 [00:15<36:11,  0.64it/s, v_num=qor7, train/loss=0.613]Epoch 0:   1%|          | 10/1406 [00:15<36:17,  0.64it/s, v_num=qor7, train/loss=0.617]Epoch 0:   1%|          | 11/1406 [00:18<38:40,  0.60it/s, v_num=qor7, train/loss=0.617]Epoch 0:   1%|          | 11/1406 [00:18<39:05,  0.59it/s, v_num=qor7, train/loss=0.509]Epoch 0:   1%|          | 12/1406 [00:21<41:28,  0.56it/s, v_num=qor7, train/loss=0.509]Epoch 0:   1%|          | 12/1406 [00:21<41:33,  0.56it/s, v_num=qor7, train/loss=0.498]Epoch 0:   1%|          | 13/1406 [00:24<43:09,  0.54it/s, v_num=qor7, train/loss=0.498]Epoch 0:   1%|          | 13/1406 [00:24<43:30,  0.53it/s, v_num=qor7, train/loss=0.443]Epoch 0:   1%|          | 14/1406 [00:27<45:13,  0.51it/s, v_num=qor7, train/loss=0.443]Epoch 0:   1%|          | 14/1406 [00:27<45:16,  0.51it/s, v_num=qor7, train/loss=0.442]Epoch 0:   1%|          | 15/1406 [00:30<46:24,  0.50it/s, v_num=qor7, train/loss=0.442]Epoch 0:   1%|          | 15/1406 [00:30<46:42,  0.50it/s, v_num=qor7, train/loss=0.396]Epoch 0:   1%|          | 16/1406 [00:33<47:59,  0.48it/s, v_num=qor7, train/loss=0.396]Epoch 0:   1%|          | 16/1406 [00:33<48:02,  0.48it/s, v_num=qor7, train/loss=0.349]Epoch 0:   1%|          | 17/1406 [00:35<48:51,  0.47it/s, v_num=qor7, train/loss=0.349]Epoch 0:   1%|          | 17/1406 [00:36<49:07,  0.47it/s, v_num=qor7, train/loss=0.333]Epoch 0:   1%|▏         | 18/1406 [00:39<50:07,  0.46it/s, v_num=qor7, train/loss=0.333]Epoch 0:   1%|▏         | 18/1406 [00:39<50:10,  0.46it/s, v_num=qor7, train/loss=0.368]Epoch 0:   1%|▏         | 19/1406 [00:41<50:47,  0.46it/s, v_num=qor7, train/loss=0.368]Epoch 0:   1%|▏         | 19/1406 [00:41<51:01,  0.45it/s, v_num=qor7, train/loss=0.257]Epoch 0:   1%|▏         | 20/1406 [00:44<51:49,  0.45it/s, v_num=qor7, train/loss=0.257]Epoch 0:   1%|▏         | 20/1406 [00:44<51:52,  0.45it/s, v_num=qor7, train/loss=0.283]Epoch 0:   1%|▏         | 21/1406 [00:47<52:19,  0.44it/s, v_num=qor7, train/loss=0.283]Epoch 0:   1%|▏         | 21/1406 [00:47<52:32,  0.44it/s, v_num=qor7, train/loss=0.293]Epoch 0:   2%|▏         | 22/1406 [00:50<53:11,  0.43it/s, v_num=qor7, train/loss=0.293]Epoch 0:   2%|▏         | 22/1406 [00:50<53:14,  0.43it/s, v_num=qor7, train/loss=0.283]Epoch 0:   2%|▏         | 23/1406 [00:53<53:35,  0.43it/s, v_num=qor7, train/loss=0.283]Epoch 0:   2%|▏         | 23/1406 [00:53<53:46,  0.43it/s, v_num=qor7, train/loss=0.234]Epoch 0:   2%|▏         | 24/1406 [00:56<53:53,  0.43it/s, v_num=qor7, train/loss=0.234]Epoch 0:   2%|▏         | 24/1406 [00:56<53:55,  0.43it/s, v_num=qor7, train/loss=0.248]Epoch 0:   2%|▏         | 25/1406 [00:58<54:08,  0.43it/s, v_num=qor7, train/loss=0.248]Epoch 0:   2%|▏         | 25/1406 [00:58<54:18,  0.42it/s, v_num=qor7, train/loss=0.189]Epoch 0:   2%|▏         | 26/1406 [01:01<54:38,  0.42it/s, v_num=qor7, train/loss=0.189]Epoch 0:   2%|▏         | 26/1406 [01:01<54:40,  0.42it/s, v_num=qor7, train/loss=0.194]Epoch 0:   2%|▏         | 27/1406 [01:04<54:50,  0.42it/s, v_num=qor7, train/loss=0.194]Epoch 0:   2%|▏         | 27/1406 [01:04<55:00,  0.42it/s, v_num=qor7, train/loss=0.243]Epoch 0:   2%|▏         | 28/1406 [01:07<55:19,  0.42it/s, v_num=qor7, train/loss=0.243]Epoch 0:   2%|▏         | 28/1406 [01:07<55:21,  0.41it/s, v_num=qor7, train/loss=0.209]Epoch 0:   2%|▏         | 29/1406 [01:10<55:28,  0.41it/s, v_num=qor7, train/loss=0.209]Epoch 0:   2%|▏         | 29/1406 [01:10<55:37,  0.41it/s, v_num=qor7, train/loss=0.178]Epoch 0:   2%|▏         | 30/1406 [01:13<55:54,  0.41it/s, v_num=qor7, train/loss=0.178]Epoch 0:   2%|▏         | 30/1406 [01:13<55:55,  0.41it/s, v_num=qor7, train/loss=0.177]Epoch 0:   2%|▏         | 31/1406 [01:15<56:01,  0.41it/s, v_num=qor7, train/loss=0.177]Epoch 0:   2%|▏         | 31/1406 [01:15<56:09,  0.41it/s, v_num=qor7, train/loss=0.176]Epoch 0:   2%|▏         | 32/1406 [01:18<56:24,  0.41it/s, v_num=qor7, train/loss=0.176]Epoch 0:   2%|▏         | 32/1406 [01:18<56:25,  0.41it/s, v_num=qor7, train/loss=0.175]Epoch 0:   2%|▏         | 33/1406 [01:21<56:29,  0.41it/s, v_num=qor7, train/loss=0.175]Epoch 0:   2%|▏         | 33/1406 [01:21<56:37,  0.40it/s, v_num=qor7, train/loss=0.178]Epoch 0:   2%|▏         | 34/1406 [01:24<56:49,  0.40it/s, v_num=qor7, train/loss=0.178]Epoch 0:   2%|▏         | 34/1406 [01:24<56:51,  0.40it/s, v_num=qor7, train/loss=0.197]Epoch 0:   2%|▏         | 35/1406 [01:27<56:53,  0.40it/s, v_num=qor7, train/loss=0.197]Epoch 0:   2%|▏         | 35/1406 [01:27<57:01,  0.40it/s, v_num=qor7, train/loss=0.134]Epoch 0:   3%|▎         | 36/1406 [01:30<57:11,  0.40it/s, v_num=qor7, train/loss=0.134]Epoch 0:   3%|▎         | 36/1406 [01:30<57:12,  0.40it/s, v_num=qor7, train/loss=0.191]Epoch 0:   3%|▎         | 37/1406 [01:32<57:14,  0.40it/s, v_num=qor7, train/loss=0.191]Epoch 0:   3%|▎         | 37/1406 [01:33<57:21,  0.40it/s, v_num=qor7, train/loss=0.149]Epoch 0:   3%|▎         | 38/1406 [01:35<57:30,  0.40it/s, v_num=qor7, train/loss=0.149]Epoch 0:   3%|▎         | 38/1406 [01:35<57:31,  0.40it/s, v_num=qor7, train/loss=0.150]Epoch 0:   3%|▎         | 39/1406 [01:38<57:32,  0.40it/s, v_num=qor7, train/loss=0.150]Epoch 0:   3%|▎         | 39/1406 [01:38<57:39,  0.40it/s, v_num=qor7, train/loss=0.167]Epoch 0:   3%|▎         | 40/1406 [01:41<57:46,  0.39it/s, v_num=qor7, train/loss=0.167]Epoch 0:   3%|▎         | 40/1406 [01:41<57:47,  0.39it/s, v_num=qor7, train/loss=0.216]Epoch 0:   3%|▎         | 41/1406 [01:44<57:47,  0.39it/s, v_num=qor7, train/loss=0.216]Epoch 0:   3%|▎         | 41/1406 [01:44<57:54,  0.39it/s, v_num=qor7, train/loss=0.170]Epoch 0:   3%|▎         | 42/1406 [01:47<58:00,  0.39it/s, v_num=qor7, train/loss=0.170]Epoch 0:   3%|▎         | 42/1406 [01:47<58:02,  0.39it/s, v_num=qor7, train/loss=0.145]Epoch 0:   3%|▎         | 43/1406 [01:49<58:01,  0.39it/s, v_num=qor7, train/loss=0.145]Epoch 0:   3%|▎         | 43/1406 [01:50<58:07,  0.39it/s, v_num=qor7, train/loss=0.129]Epoch 0:   3%|▎         | 44/1406 [01:52<58:13,  0.39it/s, v_num=qor7, train/loss=0.129]Epoch 0:   3%|▎         | 44/1406 [01:52<58:14,  0.39it/s, v_num=qor7, train/loss=0.172]Epoch 0:   3%|▎         | 45/1406 [01:55<58:13,  0.39it/s, v_num=qor7, train/loss=0.172]Epoch 0:   3%|▎         | 45/1406 [01:55<58:18,  0.39it/s, v_num=qor7, train/loss=0.145]Epoch 0:   3%|▎         | 46/1406 [01:58<58:24,  0.39it/s, v_num=qor7, train/loss=0.145]Epoch 0:   3%|▎         | 46/1406 [01:58<58:25,  0.39it/s, v_num=qor7, train/loss=0.162]Epoch 0:   3%|▎         | 47/1406 [02:01<58:23,  0.39it/s, v_num=qor7, train/loss=0.162]Epoch 0:   3%|▎         | 47/1406 [02:01<58:29,  0.39it/s, v_num=qor7, train/loss=0.190]Epoch 0:   3%|▎         | 48/1406 [02:04<58:33,  0.39it/s, v_num=qor7, train/loss=0.190]Epoch 0:   3%|▎         | 48/1406 [02:04<58:34,  0.39it/s, v_num=qor7, train/loss=0.191]Epoch 0:   3%|▎         | 49/1406 [02:06<58:32,  0.39it/s, v_num=qor7, train/loss=0.191]Epoch 0:   3%|▎         | 49/1406 [02:07<58:37,  0.39it/s, v_num=qor7, train/loss=0.190]Epoch 0:   4%|▎         | 50/1406 [02:09<58:41,  0.39it/s, v_num=qor7, train/loss=0.190]Epoch 0:   4%|▎         | 50/1406 [02:09<58:42,  0.38it/s, v_num=qor7, train/loss=0.151]Epoch 0:   4%|▎         | 51/1406 [02:12<58:40,  0.38it/s, v_num=qor7, train/loss=0.151]Epoch 0:   4%|▎         | 51/1406 [02:12<58:45,  0.38it/s, v_num=qor7, train/loss=0.168]Epoch 0:   4%|▎         | 52/1406 [02:15<58:49,  0.38it/s, v_num=qor7, train/loss=0.168]Epoch 0:   4%|▎         | 52/1406 [02:15<58:50,  0.38it/s, v_num=qor7, train/loss=0.171]Epoch 0:   4%|▍         | 53/1406 [02:18<58:47,  0.38it/s, v_num=qor7, train/loss=0.171]Epoch 0:   4%|▍         | 53/1406 [02:18<58:52,  0.38it/s, v_num=qor7, train/loss=0.135]Epoch 0:   4%|▍         | 54/1406 [02:21<58:55,  0.38it/s, v_num=qor7, train/loss=0.135]Epoch 0:   4%|▍         | 54/1406 [02:21<58:56,  0.38it/s, v_num=qor7, train/loss=0.150]Epoch 0:   4%|▍         | 55/1406 [02:23<58:53,  0.38it/s, v_num=qor7, train/loss=0.150]Epoch 0:   4%|▍         | 55/1406 [02:24<58:58,  0.38it/s, v_num=qor7, train/loss=0.162]Epoch 0:   4%|▍         | 56/1406 [02:26<59:00,  0.38it/s, v_num=qor7, train/loss=0.162]Epoch 0:   4%|▍         | 56/1406 [02:26<59:01,  0.38it/s, v_num=qor7, train/loss=0.154]Epoch 0:   4%|▍         | 57/1406 [02:29<58:58,  0.38it/s, v_num=qor7, train/loss=0.154]Epoch 0:   4%|▍         | 57/1406 [02:29<59:03,  0.38it/s, v_num=qor7, train/loss=0.130]Epoch 0:   4%|▍         | 58/1406 [02:32<59:05,  0.38it/s, v_num=qor7, train/loss=0.130]Epoch 0:   4%|▍         | 58/1406 [02:32<59:06,  0.38it/s, v_num=qor7, train/loss=0.166]Epoch 0:   4%|▍         | 59/1406 [02:35<59:03,  0.38it/s, v_num=qor7, train/loss=0.166]Epoch 0:   4%|▍         | 59/1406 [02:35<59:07,  0.38it/s, v_num=qor7, train/loss=0.131]Epoch 0:   4%|▍         | 60/1406 [02:38<59:09,  0.38it/s, v_num=qor7, train/loss=0.131]Epoch 0:   4%|▍         | 60/1406 [02:38<59:10,  0.38it/s, v_num=qor7, train/loss=0.178]Epoch 0:   4%|▍         | 61/1406 [02:40<59:06,  0.38it/s, v_num=qor7, train/loss=0.178]Epoch 0:   4%|▍         | 61/1406 [02:41<59:11,  0.38it/s, v_num=qor7, train/loss=0.177]Epoch 0:   4%|▍         | 62/1406 [02:43<59:12,  0.38it/s, v_num=qor7, train/loss=0.177]Epoch 0:   4%|▍         | 62/1406 [02:43<59:13,  0.38it/s, v_num=qor7, train/loss=0.129]Epoch 0:   4%|▍         | 63/1406 [02:46<59:10,  0.38it/s, v_num=qor7, train/loss=0.129]Epoch 0:   4%|▍         | 63/1406 [02:46<59:14,  0.38it/s, v_num=qor7, train/loss=0.164]Epoch 0:   5%|▍         | 64/1406 [02:49<59:15,  0.38it/s, v_num=qor7, train/loss=0.164]Epoch 0:   5%|▍         | 64/1406 [02:49<59:15,  0.38it/s, v_num=qor7, train/loss=0.147]Epoch 0:   5%|▍         | 65/1406 [02:52<59:12,  0.38it/s, v_num=qor7, train/loss=0.147]Epoch 0:   5%|▍         | 65/1406 [02:52<59:16,  0.38it/s, v_num=qor7, train/loss=0.142]Epoch 0:   5%|▍         | 66/1406 [02:55<59:17,  0.38it/s, v_num=qor7, train/loss=0.142]Epoch 0:   5%|▍         | 66/1406 [02:55<59:18,  0.38it/s, v_num=qor7, train/loss=0.154]Epoch 0:   5%|▍         | 67/1406 [02:57<59:14,  0.38it/s, v_num=qor7, train/loss=0.154]Epoch 0:   5%|▍         | 67/1406 [02:58<59:18,  0.38it/s, v_num=qor7, train/loss=0.156]Epoch 0:   5%|▍         | 68/1406 [03:00<59:19,  0.38it/s, v_num=qor7, train/loss=0.156]Epoch 0:   5%|▍         | 68/1406 [03:00<59:19,  0.38it/s, v_num=qor7, train/loss=0.153]Epoch 0:   5%|▍         | 69/1406 [03:03<59:16,  0.38it/s, v_num=qor7, train/loss=0.153]Epoch 0:   5%|▍         | 69/1406 [03:03<59:19,  0.38it/s, v_num=qor7, train/loss=0.139]Epoch 0:   5%|▍         | 70/1406 [03:06<59:20,  0.38it/s, v_num=qor7, train/loss=0.139]Epoch 0:   5%|▍         | 70/1406 [03:06<59:21,  0.38it/s, v_num=qor7, train/loss=0.148]Epoch 0:   5%|▌         | 71/1406 [03:09<59:17,  0.38it/s, v_num=qor7, train/loss=0.148]Epoch 0:   5%|▌         | 71/1406 [03:09<59:21,  0.37it/s, v_num=qor7, train/loss=0.204]Epoch 0:   5%|▌         | 72/1406 [03:12<59:21,  0.37it/s, v_num=qor7, train/loss=0.204]Epoch 0:   5%|▌         | 72/1406 [03:12<59:22,  0.37it/s, v_num=qor7, train/loss=0.168]Epoch 0:   5%|▌         | 73/1406 [03:14<59:18,  0.37it/s, v_num=qor7, train/loss=0.168]Epoch 0:   5%|▌         | 73/1406 [03:15<59:21,  0.37it/s, v_num=qor7, train/loss=0.161]Epoch 0:   5%|▌         | 74/1406 [03:17<59:21,  0.37it/s, v_num=qor7, train/loss=0.161]Epoch 0:   5%|▌         | 74/1406 [03:17<59:22,  0.37it/s, v_num=qor7, train/loss=0.0997]Epoch 0:   5%|▌         | 75/1406 [03:20<59:18,  0.37it/s, v_num=qor7, train/loss=0.0997]Epoch 0:   5%|▌         | 75/1406 [03:20<59:22,  0.37it/s, v_num=qor7, train/loss=0.160] Epoch 0:   5%|▌         | 76/1406 [03:23<59:22,  0.37it/s, v_num=qor7, train/loss=0.160]Epoch 0:   5%|▌         | 76/1406 [03:23<59:22,  0.37it/s, v_num=qor7, train/loss=0.121]Epoch 0:   5%|▌         | 77/1406 [03:26<59:19,  0.37it/s, v_num=qor7, train/loss=0.121]Epoch 0:   5%|▌         | 77/1406 [03:26<59:22,  0.37it/s, v_num=qor7, train/loss=0.138]Epoch 0:   6%|▌         | 78/1406 [03:29<59:22,  0.37it/s, v_num=qor7, train/loss=0.138]Epoch 0:   6%|▌         | 78/1406 [03:29<59:22,  0.37it/s, v_num=qor7, train/loss=0.105]Epoch 0:   6%|▌         | 79/1406 [03:31<59:18,  0.37it/s, v_num=qor7, train/loss=0.105]Epoch 0:   6%|▌         | 79/1406 [03:32<59:22,  0.37it/s, v_num=qor7, train/loss=0.127]Epoch 0:   6%|▌         | 80/1406 [03:34<59:21,  0.37it/s, v_num=qor7, train/loss=0.127]Epoch 0:   6%|▌         | 80/1406 [03:34<59:22,  0.37it/s, v_num=qor7, train/loss=0.177]Epoch 0:   6%|▌         | 81/1406 [03:37<59:18,  0.37it/s, v_num=qor7, train/loss=0.177]Epoch 0:   6%|▌         | 81/1406 [03:37<59:21,  0.37it/s, v_num=qor7, train/loss=0.105]Epoch 0:   6%|▌         | 82/1406 [03:40<59:21,  0.37it/s, v_num=qor7, train/loss=0.105]Epoch 0:   6%|▌         | 82/1406 [03:40<59:22,  0.37it/s, v_num=qor7, train/loss=0.132]Epoch 0:   6%|▌         | 83/1406 [03:43<59:18,  0.37it/s, v_num=qor7, train/loss=0.132]Epoch 0:   6%|▌         | 83/1406 [03:43<59:21,  0.37it/s, v_num=qor7, train/loss=0.161]Epoch 0:   6%|▌         | 84/1406 [03:46<59:20,  0.37it/s, v_num=qor7, train/loss=0.161]Epoch 0:   6%|▌         | 84/1406 [03:46<59:21,  0.37it/s, v_num=qor7, train/loss=0.157]Epoch 0:   6%|▌         | 85/1406 [03:48<59:17,  0.37it/s, v_num=qor7, train/loss=0.157]Epoch 0:   6%|▌         | 85/1406 [03:49<59:20,  0.37it/s, v_num=qor7, train/loss=0.171]Epoch 0:   6%|▌         | 86/1406 [03:51<59:19,  0.37it/s, v_num=qor7, train/loss=0.171]Epoch 0:   6%|▌         | 86/1406 [03:51<59:20,  0.37it/s, v_num=qor7, train/loss=0.124]Epoch 0:   6%|▌         | 87/1406 [03:54<59:16,  0.37it/s, v_num=qor7, train/loss=0.124]Epoch 0:   6%|▌         | 87/1406 [03:54<59:18,  0.37it/s, v_num=qor7, train/loss=0.182]Epoch 0:   6%|▋         | 88/1406 [03:57<59:18,  0.37it/s, v_num=qor7, train/loss=0.182]Epoch 0:   6%|▋         | 88/1406 [03:57<59:18,  0.37it/s, v_num=qor7, train/loss=0.175]Epoch 0:   6%|▋         | 89/1406 [04:00<59:14,  0.37it/s, v_num=qor7, train/loss=0.175]Epoch 0:   6%|▋         | 89/1406 [04:00<59:17,  0.37it/s, v_num=qor7, train/loss=0.149]Epoch 0:   6%|▋         | 90/1406 [04:03<59:16,  0.37it/s, v_num=qor7, train/loss=0.149]Epoch 0:   6%|▋         | 90/1406 [04:03<59:17,  0.37it/s, v_num=qor7, train/loss=0.141]Epoch 0:   6%|▋         | 91/1406 [04:05<59:13,  0.37it/s, v_num=qor7, train/loss=0.141]Epoch 0:   6%|▋         | 91/1406 [04:06<59:15,  0.37it/s, v_num=qor7, train/loss=0.139]Epoch 0:   7%|▋         | 92/1406 [04:08<59:15,  0.37it/s, v_num=qor7, train/loss=0.139]Epoch 0:   7%|▋         | 92/1406 [04:08<59:15,  0.37it/s, v_num=qor7, train/loss=0.164]Epoch 0:   7%|▋         | 93/1406 [04:11<59:11,  0.37it/s, v_num=qor7, train/loss=0.164]Epoch 0:   7%|▋         | 93/1406 [04:11<59:14,  0.37it/s, v_num=qor7, train/loss=0.121]Epoch 0:   7%|▋         | 94/1406 [04:14<59:13,  0.37it/s, v_num=qor7, train/loss=0.121]Epoch 0:   7%|▋         | 94/1406 [04:14<59:13,  0.37it/s, v_num=qor7, train/loss=0.142]Epoch 0:   7%|▋         | 95/1406 [04:17<59:09,  0.37it/s, v_num=qor7, train/loss=0.142]Epoch 0:   7%|▋         | 95/1406 [04:17<59:12,  0.37it/s, v_num=qor7, train/loss=0.163]Epoch 0:   7%|▋         | 96/1406 [04:20<59:11,  0.37it/s, v_num=qor7, train/loss=0.163]Epoch 0:   7%|▋         | 96/1406 [04:20<59:11,  0.37it/s, v_num=qor7, train/loss=0.109]Epoch 0:   7%|▋         | 97/1406 [04:22<59:07,  0.37it/s, v_num=qor7, train/loss=0.109]Epoch 0:   7%|▋         | 97/1406 [04:23<59:10,  0.37it/s, v_num=qor7, train/loss=0.115]Epoch 0:   7%|▋         | 98/1406 [04:25<59:09,  0.37it/s, v_num=qor7, train/loss=0.115]Epoch 0:   7%|▋         | 98/1406 [04:25<59:09,  0.37it/s, v_num=qor7, train/loss=0.128]Epoch 0:   7%|▋         | 99/1406 [04:28<59:05,  0.37it/s, v_num=qor7, train/loss=0.128]Epoch 0:   7%|▋         | 99/1406 [04:28<59:08,  0.37it/s, v_num=qor7, train/loss=0.156]Epoch 0:   7%|▋         | 100/1406 [04:31<59:07,  0.37it/s, v_num=qor7, train/loss=0.156]Epoch 0:   7%|▋         | 100/1406 [04:31<59:07,  0.37it/s, v_num=qor7, train/loss=0.128]Epoch 0:   7%|▋         | 101/1406 [04:34<59:03,  0.37it/s, v_num=qor7, train/loss=0.128]Epoch 0:   7%|▋         | 101/1406 [04:34<59:05,  0.37it/s, v_num=qor7, train/loss=0.114]Epoch 0:   7%|▋         | 102/1406 [04:37<59:04,  0.37it/s, v_num=qor7, train/loss=0.114]Epoch 0:   7%|▋         | 102/1406 [04:37<59:05,  0.37it/s, v_num=qor7, train/loss=0.141]Epoch 0:   7%|▋         | 103/1406 [04:39<58:50,  0.37it/s, v_num=qor7, train/loss=0.141]Epoch 0:   7%|▋         | 103/1406 [04:39<58:52,  0.37it/s, v_num=qor7, train/loss=0.124]Epoch 0:   7%|▋         | 104/1406 [04:40<58:31,  0.37it/s, v_num=qor7, train/loss=0.124]Epoch 0:   7%|▋         | 104/1406 [04:40<58:31,  0.37it/s, v_num=qor7, train/loss=0.108]Epoch 0:   7%|▋         | 105/1406 [04:41<58:11,  0.37it/s, v_num=qor7, train/loss=0.108]Epoch 0:   7%|▋         | 105/1406 [04:41<58:12,  0.37it/s, v_num=qor7, train/loss=0.123]Epoch 0:   8%|▊         | 106/1406 [04:43<57:52,  0.37it/s, v_num=qor7, train/loss=0.123]Epoch 0:   8%|▊         | 106/1406 [04:43<57:52,  0.37it/s, v_num=qor7, train/loss=0.145]Epoch 0:   8%|▊         | 107/1406 [04:44<57:32,  0.38it/s, v_num=qor7, train/loss=0.145]Epoch 0:   8%|▊         | 107/1406 [04:44<57:33,  0.38it/s, v_num=qor7, train/loss=0.135]Epoch 0:   8%|▊         | 108/1406 [04:45<57:14,  0.38it/s, v_num=qor7, train/loss=0.135]Epoch 0:   8%|▊         | 108/1406 [04:45<57:14,  0.38it/s, v_num=qor7, train/loss=0.145]Epoch 0:   8%|▊         | 109/1406 [04:46<56:54,  0.38it/s, v_num=qor7, train/loss=0.145]Epoch 0:   8%|▊         | 109/1406 [04:47<56:55,  0.38it/s, v_num=qor7, train/loss=0.125]Epoch 0:   8%|▊         | 110/1406 [04:48<56:37,  0.38it/s, v_num=qor7, train/loss=0.125]Epoch 0:   8%|▊         | 110/1406 [04:48<56:37,  0.38it/s, v_num=qor7, train/loss=0.118]Epoch 0:   8%|▊         | 111/1406 [04:49<56:18,  0.38it/s, v_num=qor7, train/loss=0.118]Epoch 0:   8%|▊         | 111/1406 [04:49<56:19,  0.38it/s, v_num=qor7, train/loss=0.127]Epoch 0:   8%|▊         | 112/1406 [04:50<56:01,  0.38it/s, v_num=qor7, train/loss=0.127]Epoch 0:   8%|▊         | 112/1406 [04:51<56:02,  0.38it/s, v_num=qor7, train/loss=0.136]Epoch 0:   8%|▊         | 113/1406 [04:52<55:43,  0.39it/s, v_num=qor7, train/loss=0.136]Epoch 0:   8%|▊         | 113/1406 [04:52<55:44,  0.39it/s, v_num=qor7, train/loss=0.145]Epoch 0:   8%|▊         | 114/1406 [04:53<55:27,  0.39it/s, v_num=qor7, train/loss=0.145]Epoch 0:   8%|▊         | 114/1406 [04:53<55:27,  0.39it/s, v_num=qor7, train/loss=0.118]Epoch 0:   8%|▊         | 115/1406 [04:54<55:09,  0.39it/s, v_num=qor7, train/loss=0.118]Epoch 0:   8%|▊         | 115/1406 [04:54<55:10,  0.39it/s, v_num=qor7, train/loss=0.109]Epoch 0:   8%|▊         | 116/1406 [04:56<54:54,  0.39it/s, v_num=qor7, train/loss=0.109]Epoch 0:   8%|▊         | 116/1406 [04:56<54:54,  0.39it/s, v_num=qor7, train/loss=0.107]Epoch 0:   8%|▊         | 117/1406 [04:57<54:36,  0.39it/s, v_num=qor7, train/loss=0.107]Epoch 0:   8%|▊         | 117/1406 [04:57<54:37,  0.39it/s, v_num=qor7, train/loss=0.132]Epoch 0:   8%|▊         | 118/1406 [04:58<54:21,  0.39it/s, v_num=qor7, train/loss=0.132]Epoch 0:   8%|▊         | 118/1406 [04:58<54:21,  0.39it/s, v_num=qor7, train/loss=0.109]Epoch 0:   8%|▊         | 119/1406 [05:00<54:04,  0.40it/s, v_num=qor7, train/loss=0.109]Epoch 0:   8%|▊         | 119/1406 [05:00<54:05,  0.40it/s, v_num=qor7, train/loss=0.131]Epoch 0:   9%|▊         | 120/1406 [05:01<53:50,  0.40it/s, v_num=qor7, train/loss=0.131]Epoch 0:   9%|▊         | 120/1406 [05:01<53:50,  0.40it/s, v_num=qor7, train/loss=0.117]Epoch 0:   9%|▊         | 121/1406 [05:02<53:34,  0.40it/s, v_num=qor7, train/loss=0.117]Epoch 0:   9%|▊         | 121/1406 [05:02<53:34,  0.40it/s, v_num=qor7, train/loss=0.0955]Epoch 0:   9%|▊         | 122/1406 [05:04<53:19,  0.40it/s, v_num=qor7, train/loss=0.0955]Epoch 0:   9%|▊         | 122/1406 [05:04<53:20,  0.40it/s, v_num=qor7, train/loss=0.111] Epoch 0:   9%|▊         | 123/1406 [05:05<53:04,  0.40it/s, v_num=qor7, train/loss=0.111]Epoch 0:   9%|▊         | 123/1406 [05:05<53:04,  0.40it/s, v_num=qor7, train/loss=0.147]Epoch 0:   9%|▉         | 124/1406 [05:06<52:50,  0.40it/s, v_num=qor7, train/loss=0.147]Epoch 0:   9%|▉         | 124/1406 [05:06<52:50,  0.40it/s, v_num=qor7, train/loss=0.145]Epoch 0:   9%|▉         | 125/1406 [05:07<52:35,  0.41it/s, v_num=qor7, train/loss=0.145]Epoch 0:   9%|▉         | 125/1406 [05:07<52:35,  0.41it/s, v_num=qor7, train/loss=0.105]Epoch 0:   9%|▉         | 126/1406 [05:09<52:21,  0.41it/s, v_num=qor7, train/loss=0.105]Epoch 0:   9%|▉         | 126/1406 [05:09<52:21,  0.41it/s, v_num=qor7, train/loss=0.111]Epoch 0:   9%|▉         | 127/1406 [05:10<52:06,  0.41it/s, v_num=qor7, train/loss=0.111]Epoch 0:   9%|▉         | 127/1406 [05:10<52:07,  0.41it/s, v_num=qor7, train/loss=0.122]Epoch 0:   9%|▉         | 128/1406 [05:11<51:53,  0.41it/s, v_num=qor7, train/loss=0.122]Epoch 0:   9%|▉         | 128/1406 [05:11<51:53,  0.41it/s, v_num=qor7, train/loss=0.116]Epoch 0:   9%|▉         | 129/1406 [05:13<51:39,  0.41it/s, v_num=qor7, train/loss=0.116]Epoch 0:   9%|▉         | 129/1406 [05:13<51:40,  0.41it/s, v_num=qor7, train/loss=0.114]Epoch 0:   9%|▉         | 130/1406 [05:14<51:26,  0.41it/s, v_num=qor7, train/loss=0.114]Epoch 0:   9%|▉         | 130/1406 [05:14<51:26,  0.41it/s, v_num=qor7, train/loss=0.125]Epoch 0:   9%|▉         | 131/1406 [05:15<51:13,  0.41it/s, v_num=qor7, train/loss=0.125]Epoch 0:   9%|▉         | 131/1406 [05:15<51:14,  0.41it/s, v_num=qor7, train/loss=0.129]Epoch 0:   9%|▉         | 132/1406 [05:17<51:01,  0.42it/s, v_num=qor7, train/loss=0.129]Epoch 0:   9%|▉         | 132/1406 [05:17<51:01,  0.42it/s, v_num=qor7, train/loss=0.101]Epoch 0:   9%|▉         | 133/1406 [05:18<50:51,  0.42it/s, v_num=qor7, train/loss=0.101]Epoch 0:   9%|▉         | 133/1406 [05:18<50:53,  0.42it/s, v_num=qor7, train/loss=0.136]Epoch 0:  10%|▉         | 134/1406 [05:21<50:55,  0.42it/s, v_num=qor7, train/loss=0.136]Epoch 0:  10%|▉         | 134/1406 [05:21<50:56,  0.42it/s, v_num=qor7, train/loss=0.110]Epoch 0:  10%|▉         | 135/1406 [05:24<50:56,  0.42it/s, v_num=qor7, train/loss=0.110]Epoch 0:  10%|▉         | 135/1406 [05:24<50:58,  0.42it/s, v_num=qor7, train/loss=0.112]Traceback (most recent call last):
+  File "scripts/train.py", line 235, in <module>
+    main()
+  File "scripts/train.py", line 207, in main
+    trainer.fit(model, datamodule=data, ckpt_path=resume_ckpt)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/trainer/trainer.py", line 543, in fit
+    call._call_and_handle_interrupt(
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/trainer/call.py", line 44, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/trainer/trainer.py", line 579, in _fit_impl
+    self._run(model, ckpt_path=ckpt_path)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/trainer/trainer.py", line 986, in _run
+    results = self._run_stage()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/trainer/trainer.py", line 1030, in _run_stage
+    self.fit_loop.run()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/loops/fit_loop.py", line 205, in run
+    self.advance()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/loops/fit_loop.py", line 363, in advance
+    self.epoch_loop.run(self._data_fetcher)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/loops/training_epoch_loop.py", line 140, in run
+    self.advance(data_fetcher)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/loops/training_epoch_loop.py", line 250, in advance
+    batch_output = self.automatic_optimization.run(trainer.optimizers[0], batch_idx, kwargs)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/loops/optimization/automatic.py", line 190, in run
+    self._optimizer_step(batch_idx, closure)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/loops/optimization/automatic.py", line 268, in _optimizer_step
+    call._call_lightning_module_hook(
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/trainer/call.py", line 159, in _call_lightning_module_hook
+    output = fn(*args, **kwargs)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/core/module.py", line 1308, in optimizer_step
+    optimizer.step(closure=optimizer_closure)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/core/optimizer.py", line 153, in step
+    step_output = self._strategy.optimizer_step(self._optimizer, closure, **kwargs)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/strategies/strategy.py", line 238, in optimizer_step
+    return self.precision_plugin.optimizer_step(optimizer, model=model, closure=closure, **kwargs)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/plugins/precision/amp.py", line 77, in optimizer_step
+    closure_result = closure()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/loops/optimization/automatic.py", line 144, in __call__
+    self._result = self.closure(*args, **kwargs)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/loops/optimization/automatic.py", line 138, in closure
+    self._backward_fn(step_output.closure_loss)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/loops/optimization/automatic.py", line 239, in backward_fn
+    call._call_strategy_hook(self.trainer, "backward", loss, optimizer)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/trainer/call.py", line 311, in _call_strategy_hook
+    output = fn(*args, **kwargs)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/strategies/strategy.py", line 212, in backward
+    self.precision_plugin.backward(closure_loss, self.lightning_module, optimizer, *args, **kwargs)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/plugins/precision/precision.py", line 72, in backward
+    model.backward(tensor, *args, **kwargs)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/core/module.py", line 1103, in backward
+    loss.backward(*args, **kwargs)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/torch/_tensor.py", line 521, in backward
+    torch.autograd.backward(
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/torch/autograd/__init__.py", line 289, in backward
+    _engine_run_backward(
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/torch/autograd/graph.py", line 768, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/torch/utils/data/_utils/signal_handling.py", line 67, in handler
+    _error_if_any_worker_fails()
+RuntimeError: DataLoader worker (pid 2623304) is killed by signal: Killed. 
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+Error in atexit._run_exitfuncs:
+Traceback (most recent call last):
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 136, in run
+    return future.result()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/concurrent/futures/_base.py", line 444, in result
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+return self.__get_result()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/concurrent/futures/_base.py", line 389, in __get_result
+    raise self._exception
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 219, in _wrap
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    return await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_connection.py", line 290, in publish_teardown_and_close
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._client.publish(
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await fn()
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+raise exc
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._writer.drain()
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/asyncio_manager.py", line 181, in fn_wrap_exceptions
+    await fn()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    await self._send_server_request(request)
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    await self._writer.drain()
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/streams.py", line 375, in drain
+    raise exc
+  File "/system/apps/studentenv/mohammed/sdm/lib/python3.8/asyncio/selector_events.py", line 910, in write
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+    n = self._sock.send(data)
+BrokenPipeError: [Errno 32] Broken pipe
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.
+2026-02-20 16:26:58 | asyncio | WARNING | socket.send() raised exception.

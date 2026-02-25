@@ -1,0 +1,75 @@
+2026-02-22 14:33:49 | __main__ | INFO | Set seed to 42 (deterministic mode)
+2026-02-22 14:33:49 | __main__ | INFO | Output directory: results/sep_loss_ablation/2026-02-22_14-33-49_sep_0.1
+2026-02-22 14:33:49 | __main__ | INFO | Experiment: 2026-02-22/14-33-49_sep_0.1
+2026-02-22 14:33:49 | __main__ | INFO | Seed: 42
+2026-02-22 14:33:49.993285: I tensorflow/tsl/cuda/cudart_stub.cc:28] Could not find cuda drivers on your machine, GPU will not be used.
+2026-02-22 14:33:50.044643: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2026-02-22 14:33:51.036603: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+2026-02-22 14:33:53 | src.lightning_module | INFO | Model initialized with 68.79M parameters
+Using 16bit Automatic Mixed Precision (AMP)
+/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/plugins/precision/amp.py:52: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+HPU available: False, using: 0 HPUs
+2026-02-22 14:33:53 | __main__ | INFO | ============================================================
+2026-02-22 14:33:53 | __main__ | INFO |  DIFFUSION CLASSIFIER FOR OOD DETECTION
+2026-02-22 14:33:53 | __main__ | INFO |  Training started
+2026-02-22 14:33:53 | __main__ | INFO | ============================================================
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/2
+2026-02-22 14:33:59 | __main__ | INFO | Set seed to 42 (deterministic mode)
+2026-02-22 14:33:59 | __main__ | INFO | Output directory: results/sep_loss_ablation/2026-02-22_14-33-59_sep_0.1
+2026-02-22 14:33:59 | __main__ | INFO | Experiment: 2026-02-22/14-33-59_sep_0.1
+2026-02-22 14:33:59 | __main__ | INFO | Seed: 42
+2026-02-22 14:33:59.919735: I tensorflow/tsl/cuda/cudart_stub.cc:28] Could not find cuda drivers on your machine, GPU will not be used.
+2026-02-22 14:33:59.983203: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2026-02-22 14:34:01.004421: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+2026-02-22 14:34:03 | src.lightning_module | INFO | Model initialized with 68.79M parameters
+/system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/lightning/pytorch/plugins/precision/amp.py:52: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+2026-02-22 14:34:03 | __main__ | INFO | ============================================================
+2026-02-22 14:34:03 | __main__ | INFO |  DIFFUSION CLASSIFIER FOR OOD DETECTION
+2026-02-22 14:34:03 | __main__ | INFO |  Training started
+2026-02-22 14:34:03 | __main__ | INFO | ============================================================
+Initializing distributed: GLOBAL_RANK: 1, MEMBER: 2/2
+[W222 14:34:03.133484163 CUDAAllocatorConfig.h:28] Warning: expandable_segments not supported on this platform (function operator())
+[W222 14:34:03.136551969 CUDAAllocatorConfig.h:28] Warning: expandable_segments not supported on this platform (function operator())
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 2 processes
+----------------------------------------------------------------------------------------------------
+
+[rank1]:[E222 15:04:04.594925788 ProcessGroupNCCL.cpp:607] [Rank 1] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=1, OpType=BROADCAST, NumelIn=1, NumelOut=1, Timeout(ms)=1800000) ran for 1800062 milliseconds before timing out.
+[rank1]:[E222 15:04:04.595523879 ProcessGroupNCCL.cpp:1664] [PG 0 (default_pg) Rank 1] Exception (either an error or timeout) detected by watchdog at work: 1, last enqueued NCCL work: 1, last completed NCCL work: -1.
+[rank1]:[E222 15:04:04.595533629 ProcessGroupNCCL.cpp:1709] [PG 0 (default_pg) Rank 1] Timeout at NCCL work: 1, last enqueued NCCL work: 1, last completed NCCL work: -1.
+[rank1]:[E222 15:04:04.595540399 ProcessGroupNCCL.cpp:621] [Rank 1] Some NCCL operations have failed or timed out. Due to the asynchronous nature of CUDA kernels, subsequent GPU operations might run on corrupted/incomplete data.
+[rank1]:[E222 15:04:04.595545319 ProcessGroupNCCL.cpp:627] [Rank 1] To avoid data inconsistency, we are taking the entire process down.
+[rank1]:[E222 15:04:04.596625159 ProcessGroupNCCL.cpp:1515] [PG 0 (default_pg) Rank 1] Process group watchdog thread terminated with exception: [Rank 1] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=1, OpType=BROADCAST, NumelIn=1, NumelOut=1, Timeout(ms)=1800000) ran for 1800062 milliseconds before timing out.
+Exception raised from checkTimeout at ../torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:609 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7f21e6196f86 in /system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::WorkNCCL::checkTimeout(std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >) + 0x1d2 (0x7f215fc3b8d2 in /system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::watchdogHandler() + 0x233 (0x7f215fc42313 in /system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x10c (0x7f215fc446fc in /system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: <unknown function> + 0xd3b55 (0x7f21e77c6b55 in /system/apps/studentenv/mohammed/sdm/bin/../lib/libstdc++.so.6)
+frame #5: <unknown function> + 0x8b2ea (0x7f21f848b2ea in /lib64/libc.so.6)
+frame #6: <unknown function> + 0x1103c0 (0x7f21f85103c0 in /lib64/libc.so.6)
+
+terminate called after throwing an instance of 'c10::DistBackendError'
+  what():  [PG 0 (default_pg) Rank 1] Process group watchdog thread terminated with exception: [Rank 1] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=1, OpType=BROADCAST, NumelIn=1, NumelOut=1, Timeout(ms)=1800000) ran for 1800062 milliseconds before timing out.
+Exception raised from checkTimeout at ../torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:609 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7f21e6196f86 in /system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::WorkNCCL::checkTimeout(std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >) + 0x1d2 (0x7f215fc3b8d2 in /system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::watchdogHandler() + 0x233 (0x7f215fc42313 in /system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x10c (0x7f215fc446fc in /system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: <unknown function> + 0xd3b55 (0x7f21e77c6b55 in /system/apps/studentenv/mohammed/sdm/bin/../lib/libstdc++.so.6)
+frame #5: <unknown function> + 0x8b2ea (0x7f21f848b2ea in /lib64/libc.so.6)
+frame #6: <unknown function> + 0x1103c0 (0x7f21f85103c0 in /lib64/libc.so.6)
+
+Exception raised from ncclCommWatchdog at ../torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:1521 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x7f21e6196f86 in /system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0xe5aa84 (0x7f215f8cda84 in /system/apps/studentenv/mohammed/sdm/lib/python3.8/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: <unknown function> + 0xd3b55 (0x7f21e77c6b55 in /system/apps/studentenv/mohammed/sdm/bin/../lib/libstdc++.so.6)
+frame #3: <unknown function> + 0x8b2ea (0x7f21f848b2ea in /lib64/libc.so.6)
+frame #4: <unknown function> + 0x1103c0 (0x7f21f85103c0 in /lib64/libc.so.6)
+
+[rank: 1] Child process with PID 1661768 terminated with code -6. Forcefully terminating all other processes to avoid zombies 🧟
