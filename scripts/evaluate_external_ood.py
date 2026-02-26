@@ -111,6 +111,36 @@ def load_external_ood_datasets(data_dir: str):
     except Exception as e:
         logger.warning(f"  Places365 failed (using FashionMNIST as backup): {e}")
 
+    # 6. STL-10 — standard OOD benchmark for CIFAR-10 models in the literature.
+    #    Higher-resolution natural images (96x96 → resized to 32).
+    #    10 classes (airplane, bird, car, cat, deer, dog, horse, monkey, ship, truck)
+    #    — visually similar domain but different distribution from CIFAR-10 class 0.
+    try:
+        stl10 = torchvision.datasets.STL10(
+            root=data_dir, split='test', download=True, transform=tfm
+        )
+        # Subsample to 5000 for speed (full test = 8000)
+        indices = np.random.RandomState(42).choice(len(stl10), min(5000, len(stl10)), replace=False)
+        stl10 = Subset(stl10, indices.tolist())
+        datasets['stl10'] = stl10
+        logger.info(f"  STL-10: {len(stl10)} images loaded")
+    except Exception as e:
+        logger.warning(f"  STL-10 failed: {e}")
+
+    # 7. Food-101 — highly distinct visual domain (food photos) vs CIFAR-10 (vehicles/animals).
+    #    Strong OOD signal expected; commonly used to show model discriminativeness.
+    try:
+        food101 = torchvision.datasets.Food101(
+            root=data_dir, split='test', download=True, transform=tfm
+        )
+        # Subsample to 5000 for speed (full test = 25750)
+        indices = np.random.RandomState(42).choice(len(food101), min(5000, len(food101)), replace=False)
+        food101 = Subset(food101, indices.tolist())
+        datasets['food101'] = food101
+        logger.info(f"  Food-101: {len(food101)} images loaded")
+    except Exception as e:
+        logger.warning(f"  Food-101 failed: {e}")
+
     return datasets
 
 

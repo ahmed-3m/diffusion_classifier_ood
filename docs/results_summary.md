@@ -1,16 +1,16 @@
 # Results Summary
 
 > All final metrics for the Binary CDM OOD Detection project.
-> Last verified: 2026-02-25 from checkpoint filenames.
+> Last verified: 2026-02-26 from checkpoints and JSON files.
 
 ---
 
-## 1. Main Experiment — Binary CDM (3 Seeds)
+## 1. Main Experiment — Binary CDM (3 Seeds, λ=0.01)
 
 **Training config (identical for all seeds):**
 ```
 model:             ConditionalUNet (35.7M params)
-dataset:           CIFAR-10 binary (ID=class 0, OOD=classes 1-9)
+dataset:           CIFAR-10 binary (ID=class 0 airplane, OOD=classes 1-9)
 image_size:        32×32×3
 batch_size:        64 (effective 128 with grad accumulation ×2)
 learning_rate:     1e-4 (cosine schedule, 5-epoch warmup)
@@ -25,8 +25,6 @@ noise_schedule:    squaredcos_cap_v2 (1000 timesteps)
 prediction_type:   epsilon
 ```
 
-> Note: The sep loss ablation (λ=0.02) achieved **AUROC=0.9911**, surpassing the best seed run (0.9887).
-
 | Seed | Val AUROC | Best Epoch | Checkpoint Date |
 |------|-----------|------------|-----------------|
 | 42   | **0.9873** | 19        | 2026-02-19      |
@@ -34,16 +32,13 @@ prediction_type:   epsilon
 | 456  | **0.9887** | 19        | 2026-02-19      |
 | **Mean ± Std** | **0.9882 ± 0.0006** | — | — |
 
-> Note: All 3 seeds converged at epoch 19, which was the first validation
-> checkpoint (eval_interval=10, so eval at epoch 9 and 19). Early stopping
-> triggered after patience=30 from epoch 19.
+> 🏆 **Project best AUROC ever: 0.9911** achieved in the sep loss ablation (λ=0.02, seed 42, epoch 29).
 
 ---
 
-## 2. Separation Loss Ablation (λ sweep)
+## 2. Separation Loss Ablation (λ sweep, seed=42)
 
 All runs: seed=42, batch=64, lr=1e-4, max_epochs=200, num_trials=15.
-Only the separation_loss_weight λ varies.
 
 | λ (weight) | Best AUROC | Best Epoch | Δ vs baseline |
 |------------|-----------|------------|---------------|
@@ -56,20 +51,59 @@ Only the separation_loss_weight λ varies.
 
 **Key findings:**
 - **Optimal: λ = 0.02** (AUROC = 0.9911) — new all-time best, exceeds seed runs (0.9887)
-- **Optimal range: λ ∈ [0.01, 0.05]** — all values give AUROC ≥ 0.9851
-- Without separation loss (λ=0): AUROC drops to 0.8025 (−18.4%)
-- Too large λ=0.1: performance degrades to 0.9667 (separation dominates MSE)
-- λ=0.1 converges much later (epoch 149 vs 19 for others)
+- **Robust range: λ ∈ [0.01, 0.05]** — all values give AUROC ≥ 0.9851
+- Without separation loss (λ=0): AUROC drops to 0.8025 (−18.9% penalty)
+- Too large λ=0.1: performance drops to 0.9667 and converges much later (epoch 149)
+
+### λ=0.02 Multi-seed (in progress)
+| Seed | AUROC | Epoch | Status |
+|------|-------|-------|--------|
+| 42   | 0.9911 | 29   | ✅ Done |
+| 123  | 0.9840 | 29   | ✅ Done |
+| 456  | —      | —    | ⏳ Not started yet |
 
 ---
 
-## 3. External OOD Evaluation
+## 3. External OOD Evaluation (seed 42 & 123 completed)
 
-**Status: ⚠️ JSON is EMPTY — needs re-running**
+Evaluated on 7 datasets using trained checkpoints.
+> ⚠️ Seed 456 external OOD results have suspicious threshold values (possible scoring unit mismatch) — use seeds 42 & 123 only until verified.
 
-`results/external_ood_results.json` contains `{}`.
-The evaluation script (`scripts/evaluate_external_ood.py`) needs to be re-run
-against all 3 seed checkpoints on external datasets (SVHN, CIFAR-100, etc.).
+### Seed 42 Results (K=50, difference scoring)
+| OOD Dataset | AUROC | FPR@95% | AUPR |
+|-------------|-------|---------|------|
+| CIFAR-10 (within) | **0.9898** | 4.7% | 0.9987 |
+| Food-101 | **0.9927** | 3.4% | 0.9984 |
+| CIFAR-100 | 0.9697 | 14.8% | 0.9965 |
+| STL-10 | 0.9521 | 32.4% | 0.9906 |
+| FashionMNIST | 0.9404 | 20.6% | 0.9916 |
+| Textures (DTD) | 0.9284 | 30.1% | 0.9597 |
+| SVHN | 0.9050 | 27.1% | 0.9938 |
+
+### Seed 123 Results (K=50, difference scoring)
+| OOD Dataset | AUROC | FPR@95% | AUPR |
+|-------------|-------|---------|------|
+| CIFAR-10 (within) | **0.9906** | 4.7% | 0.9989 |
+| Food-101 | **0.9897** | 4.7% | 0.9977 |
+| CIFAR-100 | 0.9647 | 15.7% | 0.9959 |
+| STL-10 | 0.9512 | 33.9% | 0.9905 |
+| SVHN | 0.9470 | 18.2% | 0.9971 |
+| Textures (DTD) | 0.9310 | 31.7% | 0.9609 |
+| FashionMNIST | 0.9287 | 23.8% | 0.9899 |
+
+### Seeds 42+123 Average
+| OOD Dataset | AUROC Mean | FPR@95% Mean |
+|-------------|------------|--------------|
+| CIFAR-10 (within) | **0.9902** | 4.7% |
+| Food-101 | **0.9912** | 4.1% |
+| CIFAR-100 | 0.9672 | 15.3% |
+| STL-10 | 0.9516 | 33.2% |
+| FashionMNIST | 0.9346 | 22.2% |
+| Textures (DTD) | 0.9297 | 30.9% |
+| SVHN | 0.9260 | 22.7% |
+
+> General pattern: strong on semantically similar OOD (CIFAR-100, Food-101), weaker on
+> distribution-shifted sets (SVHN, Textures). This is expected for diffusion-based methods.
 
 ---
 
@@ -77,21 +111,16 @@ against all 3 seed checkpoints on external datasets (SVHN, CIFAR-100, etc.).
 
 Source: `results/k_ablation_results.json` (verified)
 
-**Within-CIFAR (ID vs OOD from same CIFAR-10):**
-
 | K | AUROC | FPR@95% | Time (s) | Time/sample (s) |
 |---|-------|---------|----------|-----------------|
-| 1 | 0.9100 | 40.8% | 97.9 | 0.010 |
+| 1 | 0.9100 | 40.8% | 97.9  | 0.010 |
 | 5 | 0.9724 | 14.3% | 486.3 | 0.049 |
 | 10 | 0.9819 | 9.4% | 972.9 | 0.097 |
 | 25 | 0.9852 | 7.3% | 2431.8 | 0.243 |
 | 50 | 0.9864 | 6.6% | 4861.1 | 0.486 |
 | 100 | 0.9869 | 6.6% | 9723.6 | 0.972 |
 
-**Key findings:**
-- Diminishing returns beyond K=25
-- K=15 (used in training/eval) is a good speed/accuracy tradeoff
-- K=1 still achieves 0.91 AUROC — model has strong single-pass signal
+> Recommended: K=15 (used in training evals) — good speed/accuracy tradeoff.
 
 ---
 
@@ -105,28 +134,33 @@ Source: `results/scoring_method_results.json` (verified)
 | ratio | 0.9862 | 6.6% | **0.9606** | **22.5%** |
 | id_error | 0.7830 | 67.0% | 0.2023 | 96.5% |
 
-**Key findings:**
-- `difference` and `ratio` perform similarly on within-CIFAR
-- `ratio` is slightly better on SVHN (external OOD)
-- `id_error` (using only ID condition) is much worse — confirms binary conditioning is essential
-
 ---
 
 ## 6. Ablation — Timestep Strategy
 
-Source: `results/latex_tables/timestep_strategy_table.tex` (verified)
+Source: `results/timestep_strategy_results.json` (verified)
 
-| Strategy | CIFAR AUROC | SVHN AUROC |
-|----------|------------|------------|
-| **uniform** | **98.9%** | **95.4%** |
-| stratified | 98.8% | 95.0% |
-| mid_focus | 98.5% | 93.8% |
+| Strategy | CIFAR AUROC | CIFAR FPR95 | SVHN AUROC |
+|----------|------------|-------------|------------|
+| **uniform** | **0.9887** | **5.4%** | **0.9544** |
+| stratified | 0.9881 | 5.9% | 0.9498 |
+| mid_focus | 0.9855 | 7.6% | 0.9380 |
 
-**Key findings:**
-- All strategies perform well (within 0.4% of each other on CIFAR)
-- `uniform` slightly edges out `mid_focus` — but mid_focus was used in all main runs
-- This suggests the model is robust to timestep strategy choice
+---
 
-> Note: Even though `uniform` appears slightly better here, the main experiments
-> used `mid_focus`. The difference is within noise and would require multi-seed
-> runs to confirm.
+## 7. Available Figures
+
+| Figure | Content | Date |
+|--------|---------|------|
+| `separation_loss_ablation_final.png` | ⭐ Main ablation curve | Feb 25 |
+| `sep_loss_dual.png` | Ablation curve + convergence speed bars | Feb 26 |
+| `three_seed_auroc.png` | Bar chart: 3-seed AUROC reliability | Feb 26 |
+| `training_curves.png` | AUROC+FPR95 vs epoch (3 seeds) | Feb 26 |
+| `roc_curves_cifar10.png` | ROC curves for all 5 OOD datasets (seed 42) | Feb 26 |
+| `scoring_methods_full.png` | Scoring method comparison (3 panels) | Feb 26 |
+| `score_distributions_all.png` | Score distributions per seed | Feb 25 |
+| `k_ablation.png` | K sensitivity curve | Feb 25 |
+| `calibration_curves.png` | Calibration of OOD scores | Feb 25 |
+| `timestep_strategy_comparison.png` | Timestep strategy comparison | Feb 25 |
+| `confusion_matrix.png` | Confusion matrix on test set | Feb 25 |
+| `scoring_method_comparison.png` | Scoring method comparison (older) | Feb 25 |

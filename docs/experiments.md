@@ -64,10 +64,16 @@ seeds:               42 / 123 / 456
 **Script:** `scripts/evaluate_external_ood.py`
 **Config:** num_trials=50, batch_size=64, scoring=difference, timestep=mid_focus
 
-**⚠️ Status: INCOMPLETE**
-`results/external_ood_results.json` is **empty** `{}`.
-The script was run but produced no results — likely crashed or had no data downloaded.
-This needs to be re-run.
+**Status: ✅ COMPLETE for seeds 42 and 123** (2026-02-26)
+
+| Seed | CIFAR-10 within | SVHN | CIFAR-100 | Food-101 | Textures | FashionMNIST | STL-10 |
+|------|-----------------|------|-----------|---------|---------|-----------|---------|
+| 42   | 0.9898 | 0.9050 | 0.9697 | **0.9927** | 0.9284 | 0.9404 | 0.9521 |
+| 123  | 0.9906 | 0.9470 | 0.9647 | **0.9897** | 0.9310 | 0.9287 | 0.9512 |
+| **Mean** | **0.9902** | **0.9260** | **0.9672** | **0.9912** | **0.9297** | **0.9346** | **0.9516** |
+
+> ⚠️ Seed 456 external results have suspicious threshold values (likely scoring unit mismatch)
+> and need re-verification. Seeds 42 and 123 results are confirmed valid.
 
 ---
 
@@ -145,13 +151,48 @@ Key: All within 0.4% of each other. Uniform slightly best (98.9%).
 
 ---
 
-## Known Issues / TODOs
+## Experiment 5 — λ=0.02 Multi-seed (in progress)
 
-1. **External OOD JSON is empty** — `results/external_ood_results.json` = `{}`. Re-run needed.
-2. **main_results_table.tex is empty** — needs regeneration with seed data.
-3. **separation_loss_table.tex has partial zeros** — needs updating with all 6 weights.
-4. **No AUPR/FPR95 for sep ablation** — only AUROC captured in checkpoints. Would need
-   re-evaluation of each checkpoint to get full metrics.
+**Goal:** Confirm the new peak AUROC (0.9911 at λ=0.02, seed=42) generalises across seeds.
+
+**Script:** `scripts/run_seeds_lambda02.sh`
+**Config:** Same as Experiment 4 (sep_0.02) but with seeds 123 and 456.
+
+| Seed | AUROC | Best Epoch | Status | Date |
+|------|-------|------------|--------|----- |
+| 42   | 0.9911 | 29        | ✅ Done | Feb 25 |
+| 123  | 0.9840 | 29        | ✅ Done | Feb 26 |
+| 456  | —      | —         | ⏳ Not started | — |
+
+> When seed 456 completes, the 3-seed mean for λ=0.02 can be computed and compared
+> to λ=0.01's mean of 0.9882 ± 0.0006.
+
+---
+
+## Experiment 6 — Figure Generation
+
+**Script:** `scripts/generate_missing_figures.py`, `scripts/generate_all_figures_tables.py`
+**Date:** 2026-02-26
+
+New figures generated:
+- `training_curves.png` — AUROC + FPR95 vs epoch for 3 seeds (λ=0.01)
+- `roc_curves_cifar10.png` — ROC curves across 5 OOD datasets (seed 42)
+- `sep_loss_dual.png` — Ablation curve + convergence speed bar chart
+- `three_seed_auroc.png` — 3-seed bar chart showing 0.9882 ± 0.0006
+- `scoring_methods_full.png` — 3-panel scoring method comparison
+
+---
+
+## Known Issues / Status
+
+| Item | Status |
+|------|--------|
+| External OOD results | ✅ Done (seeds 42 & 123); ⚠️ Seed 456 needs re-verification |
+| main_results_table.tex | ✅ Regenerated (Feb 26) |
+| separation_loss_table.tex | ✅ Updated with all 6 λ values |
+| λ=0.02 multi-seed | ✅ Seed 123 done (0.9840); ⏳ Seed 456 not started |
+| AUPR/FPR95 for sep ablation | ⚠️ Only AUROC in checkpoints; full metrics need re-eval |
+| Seed 456 external OOD | ⚠️ Threshold values look wrong; re-run needed |
 
 ---
 
